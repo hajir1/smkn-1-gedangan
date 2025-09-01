@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Article extends Model
 {
     use HasFactory;
-    protected $fillable = ["title","slug","writer_id","text_content","image"];
+    protected $fillable = ["title","slug","writer_id","text_content","image","view"];
 
     public function writer() : BelongsTo {
         return $this->belongsTo(User::class);

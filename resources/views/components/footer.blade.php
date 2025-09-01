@@ -154,11 +154,11 @@
 
             <ul class="mt-6 space-y-4 text-sm">
               <li data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom">
-                <a href="{{ route("info_ppdb") }}" class="text-gray-700 transition hover:opacity-75"> Informasi PPDB </a>
+                <a href="" class="text-gray-700 transition hover:opacity-75"> Informasi PPDB </a>
               </li>
 
               <li data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom">
-                <a href="{{ route("jadwal") }}" class="text-gray-700 transition hover:opacity-75"> Jadwal PPDB </a>
+                <a href="" class="text-gray-700 transition hover:opacity-75"> Jadwal PPDB </a>
               </li>
             </ul>
           </div>

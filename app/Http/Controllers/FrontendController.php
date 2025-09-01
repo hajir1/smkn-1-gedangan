@@ -90,6 +90,7 @@ class FrontendController extends Controller
             $query->where("nama","prestasi");
         })->take(5)->latest()->get();
         });
+        
         $articles = Cache::remember("articles_by_not_prestatis_take_5", 60 * 60 * 24 * 7 , function(){
             return Article::with(["kategoris"])->whereDoesntHave("kategoris",function($query){
             $query->where("nama","prestasi");
@@ -375,10 +376,10 @@ class FrontendController extends Controller
         return view("frontend.informasi.drive",compact("drives"));
     }
     public function jadwal()  {
-        return redirect()->away("https://ppdbjatim.net/informasi/jadwal/");
+        return redirect()->away("");
     }
     public function info_ppdb()  {
-        return redirect()->away("https://ppdbjatim.net/");
+        return redirect()->away("");
     }
     public function survey()  {
         return redirect()->away("https://surveyminat.smkn1gedangan-malang.sch.id/");
@@ -436,9 +437,20 @@ class FrontendController extends Controller
     }
 
    public function readArticle($slug)  {
-        $kategoris = Kategori::get();
-        $articleTerbarus = Article::take(5)->latest()->get();
-        $article = Article::where("slug",$slug)->first();
+        $kategoris = Cache::remember("kategoris", 60 * 60 * 24 * 7 * 38 *6, function(){
+                return Kategori::get();
+        });
+        $galeris = Cache::remember("galeris_take_2_" . $slug, 60 * 60 * 24 * 7 , function(){
+            return Galeri::latest()->take(2)->get();
+        });
+        
+
+        $articleTerbarus = Cache::remember("articles_get_6", 60 * 60 * 24 * 7 , function(){
+                    return Article::latest()->paginate(6);
+        });
+        $article = Cache::remember("article_". $slug, 60 * 60 * 24 * 7 , function() use($slug){
+                    return Article::where("slug",$slug)->first();
+        });
 
         if(!$article){
             abort(404,"artikel yang anda cari tidak ada di database");

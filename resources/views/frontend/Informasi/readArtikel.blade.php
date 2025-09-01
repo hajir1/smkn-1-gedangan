@@ -40,8 +40,8 @@
             <h2 class="w-full text-center my-5 md:my-4  text-xl uppercase font-semibold text-gray-900 dark:text-white">Artikel Terbaru </h2>
             @foreach ($articleTerbarus as $articleTerbaru)
                         <a href="{{route("readArticle",$articleTerbaru->slug)}}" class="flex items-center bg-white border border-gray-200 mt-3 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-full  lg:w-full">
-                            @if (file_exists(public_path('img/articles_images/' . $articleTerbaru->image)) && $articleTerbaru->image)
-                            <img data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom" class="object-cover w-20 h-20 rounded-t-lg md rounded-md" src="{{ asset('img/articles_images/' . $articleTerbaru->image) }}">
+                            @if (file_exists(public_path('storage/' . $articleTerbaru->image)) && $articleTerbaru->image)
+                            <img data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom" class="object-cover w-20 h-20 rounded-t-lg md rounded-md" src="{{ asset('storage/' . $articleTerbaru->image) }}">
                         @else
                             <div data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom" class="bg-gray-200 h-20 w-20 grid place-content-center text-xs ">
                                 <span>No Image</span> <!-- Pesan fallback -->

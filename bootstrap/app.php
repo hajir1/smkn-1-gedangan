@@ -18,7 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-        "checkRole"=> CheckRoleMiddleware::class,"viewArticle"=>ViewarticleMiddleware::class,
+        "checkRole"=> CheckRoleMiddleware::class,
+        "viewArticle"=>ViewarticleMiddleware::class,
         "pengunjung"=>StatistikPengunjungMiddleware::class,"cache"=>NoCacheMidlleware::class,
         "captcha"=>CaptchaMiddleware::class,"monitorPage"=>MonitorPageErrors::class]);
     })

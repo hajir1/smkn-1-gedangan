@@ -100,7 +100,7 @@
                     <div class="prose mb-3 text-gray-900 dark:text-gray-400 mt-6 w-full">
                         {!!$profil->konten!!}
                     </div>
-                    <button onclick="window.location.href ='https://ppdbjatim.net/'" type="button" class="w-2/5 sm:w-1/5 lg:w-1/5 mt-2 mb-8 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Info ppdb</button>
+                    <button onclick="" type="button" class="w-2/5 sm:w-1/5 lg:w-1/5 mt-2 mb-8 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Info ppdb</button>
             </div>
             <div class="flex flex-col  md:flex-row-reverse lg:flex-col items-center w-full md:w-full  lg:w-[35%]">
                 <div data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom" class="w-full md:mt-2 md:w-[38%] lg:w-full max-w-sm min-h-[40rem] rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-8 ">
@@ -128,7 +128,7 @@
                 </div>
                 <div data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom" class="w-full md:w-3/5 lg:w-full mt-8 md:mt-2 p-2 ">
                     <div class="w-full">
-                        <h1 class="{{ count($prestasis) < 1 ? 'visible' : '' }} text-2xl font-semibold mt-6 mb-2 text-gray-800 dark:text-gray-100">Prestasi Terbaru</h1>
+                        <h1 class="{{ count($prestasis) < 1 ? 'hidden' : '' }} text-2xl font-semibold mt-6 mb-2 text-gray-800 dark:text-gray-100">Prestasi Terbaru</h1>
                         <div class="w-full flex md:pl-0 flex-col sm:flex-row md:flex-col flex-wrap gap-2">
                             @foreach ($prestasis as $prestasi)
                         <a href="{{route("readArticle",$prestasi->slug)}}" class="flex items-center  border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-full sm:w-[45%] md:w-full">
