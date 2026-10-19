@@ -24,6 +24,7 @@ class RightFeComponent extends Component
      */
     public function render(): View
     {
+        /* ambil data 2 galeri dari cache*/
         $galeris = Cache::remember("galeris_take_2", 60 * 60 * 24 * 7 , function(){
             return Galeri::latest()->take(2)->get();
         });

@@ -3,8 +3,8 @@
     <h2 data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom" class="mb-2 md:mt-8 text-xl uppercase font-semibold text-gray-900 dark:text-white">Artikel Terbaru </h2>
     @foreach ($articleTerbarus as $articleTerbaru)
                 <a href="{{route("readArticle",$articleTerbaru->slug)}}" class="flex items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-full">
-                    @if (file_exists(public_path('img/articles_images/' . $articleTerbaru->image)) && $articleTerbaru->image)
-                    <img data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom"  class="object-cover w-20 h-20 rounded-t-lg md rounded-md" src="{{ asset('img/articles_images/' . $articleTerbaru->image) }}">
+                    @if ( $articleTerbaru->image)
+                    <img data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom"  class="object-cover w-20 h-20 rounded-t-lg md rounded-md" src="{{ asset('storage/' . $articleTerbaru->image) }}">
                 @else
                     <div data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom"  class="bg-gray-200 h-20 w-20 text-xs grid place-content-center">
                         <span>No Image</span> <!-- Pesan fallback -->
@@ -22,8 +22,8 @@
     <h2 data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom" class="mb-2 md:mt-8 text-xl uppercase font-semibold text-gray-900 dark:text-white">Galeri Terbaru </h2>
     @foreach ($galeris as $galeri)
     <div  class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        @if (file_exists(public_path('img/galeri/' . $galeri->photo)) && $galeri->photo)
-        <img data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom" class="rounded-t-lg object-cover w-full h-64" src="{{ asset("img/galeri/" . $galeri->photo) }}" alt="{{$galeri->judul}}"/>
+        @if ( $galeri->photo)
+        <img data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom" class="rounded-t-lg object-cover w-full h-64" src="{{ asset('storage/' . $galeri->photo) }}" alt="{{$galeri->judul}}"/>
 
     @else
         <div data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom" class="w-full bg-gray-200 h-52">

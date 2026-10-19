@@ -4,72 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f5440bbe160df9e54c2a9fe2a38f78a",
+    "content-hash": "f7c874776e293cc2ab3f54cea7d294c3",
     "packages": [
-        {
-            "name": "anhskohbo/no-captcha",
-            "version": "3.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/anhskohbo/no-captcha.git",
-                "reference": "6f129419a7f0d0a1ed9849fdaaed34e6d83a03cc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/anhskohbo/no-captcha/zipball/6f129419a7f0d0a1ed9849fdaaed34e6d83a03cc",
-                "reference": "6f129419a7f0d0a1ed9849fdaaed34e6d83a03cc",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^6.2|^7.0",
-                "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
-                "php": ">=5.5.5"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.8|^9.5.10|^10.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "NoCaptcha": "Anhskohbo\\NoCaptcha\\Facades\\NoCaptcha"
-                    },
-                    "providers": [
-                        "Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Anhskohbo\\NoCaptcha\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "anhskohbo",
-                    "email": "anhskohbo@gmail.com"
-                }
-            ],
-            "description": "No CAPTCHA reCAPTCHA For Laravel.",
-            "keywords": [
-                "captcha",
-                "laravel",
-                "laravel4",
-                "laravel5",
-                "laravel6",
-                "no-captcha",
-                "recaptcha"
-            ],
-            "support": {
-                "issues": "https://github.com/anhskohbo/no-captcha/issues",
-                "source": "https://github.com/anhskohbo/no-captcha/tree/3.6.0"
-            },
-            "time": "2024-03-13T02:22:17+00:00"
-        },
         {
             "name": "brick/math",
             "version": "0.12.1",
@@ -576,20 +512,20 @@
         },
         {
             "name": "ezyang/htmlpurifier",
-            "version": "v4.18.0",
+            "version": "v4.19.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "cb56001e54359df7ae76dc522d08845dc741621b"
+                "reference": "5e0539132d934f936fbae2c88b55d58f9438623f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/cb56001e54359df7ae76dc522d08845dc741621b",
-                "reference": "cb56001e54359df7ae76dc522d08845dc741621b",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/5e0539132d934f936fbae2c88b55d58f9438623f",
+                "reference": "5e0539132d934f936fbae2c88b55d58f9438623f",
                 "shasum": ""
             },
             "require": {
-                "php": "~5.6.0 || ~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
+                "php": "~5.6.0 || ~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
             },
             "require-dev": {
                 "cerdic/css-tidy": "^1.7 || ^2.0",
@@ -631,9 +567,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ezyang/htmlpurifier/issues",
-                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.18.0"
+                "source": "https://github.com/ezyang/htmlpurifier/tree/v4.19.1"
             },
-            "time": "2024-11-01T03:51:45+00:00"
+            "time": "2026-09-15T15:42:51+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -8331,12 +8267,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }

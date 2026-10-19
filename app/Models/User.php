@@ -7,13 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    public const ROLE_ADMIN = 1;
+    public const ROLE_USER = 2;
+
     /**
-     * The attributes that are mass assignable.
+     * "role" dan "deletable" sengaja TIDAK mass-assignable supaya tidak bisa
+     * diisi lewat form (mencegah user biasa menjadikan dirinya admin).
      *
      * @var array<int, string>
      */
@@ -21,12 +25,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        "role"
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
      * @var array<int, string>
      */
     protected $hidden = [
@@ -34,20 +35,28 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'role' => 'integer',
+            'deletable' => 'boolean',
         ];
     }
-    public function isDeletable()
+
+    public function isAdmin(): bool
     {
-    return $this->deletable ?? true;
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isDeletable(): bool
+    {
+        return (bool) ($this->deletable ?? true);
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'writer_id');
     }
 }

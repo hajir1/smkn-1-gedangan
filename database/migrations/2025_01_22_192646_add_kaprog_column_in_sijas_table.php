@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('sijas', function (Blueprint $table) {
-            $table->string("photo_kaprog");
-            $table->string("nama_kaprog");
-            $table->string("ket_kaprog");
+            $table->string("photo_kaprog")->default("");
+            $table->string("nama_kaprog")->default("");
+            $table->string("ket_kaprog")->default("");
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('sijas', function (Blueprint $table) {
-            //
+            $table->dropColumn(["photo_kaprog", "nama_kaprog", "ket_kaprog"]);
         });
     }
 };

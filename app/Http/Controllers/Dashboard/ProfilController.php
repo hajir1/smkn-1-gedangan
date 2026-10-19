@@ -15,16 +15,12 @@ use Illuminate\Support\Facades\File;
 class ProfilController extends Controller
 {
     public function index()  {
-        $profil = Cache::remember("profil",60 * 60* 24 * 7,function(){
-            return Profil::first();
-        });
+        $profil = Profil::first();
         return view("backend.welcomes.profil.index",compact("profil"));
     }
     public function edit(string $id)
     {
-        $profil = Cache::remember("profil",60 * 60* 24 * 7,function() use($id){
-            return Profil::findOrFail(Crypt::decrypt($id));;
-        });
+        $profil = Profil::findOrFail(Crypt::decrypt($id));
         if($profil){
             return view("backend.welcomes.profil.edit",compact("profil"));
         }
@@ -82,7 +78,6 @@ class ProfilController extends Controller
         $profil->konten = $purifier->purify($request->konten);
 
         $profil->save();
-        Cache::delete("profil");
     return redirect()->route('profil.index')->with('success', 'Profil berhasil diperbarui!');
 }
 }

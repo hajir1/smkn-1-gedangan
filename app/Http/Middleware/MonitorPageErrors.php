@@ -2,41 +2,41 @@
 
 namespace App\Http\Middleware;
 
-use Carbon\Carbon;
+use App\Services\TelegramNotifier;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Kirim notifikasi Telegram saat terjadi error 500 (dan 404 jika diaktifkan).
+ *
+ * Versi lama memanggil $next($request) dua kali sehingga setiap request diproses
+ * ganda (data bisa tersimpan dua kali) dan mengirim Telegram tanpa batas.
+ */
 class MonitorPageErrors
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
+    public function __construct(private readonly TelegramNotifier $telegram)
+    {
+    }
+
     public function handle(Request $request, Closure $next): Response
     {
         $response = $next($request);
-        if ($response->getStatusCode() === 404 || $response->getStatusCode() === 500) {
-            $content = $response->getStatusCode() === 404 ? "not found" : "server error";
-            $params = [
-                'chat_id' => config("services.telegram.chat_id"),
-                'text' => "Error Terdeteksi\n"." url = " . $request->fullUrl() ."\n".
-                "status_code = ". $response->getStatusCode(). "\n" .
-                "content = " . $content. "\n".
-                "waktu = " .now()
-            ];
-            $url = "https://api.telegram.org/bot" . config("services.telegram.bot_token") . "/sendMessage";
-            $response = Http::post($url, $params);
+        $status = $response->getStatusCode();
 
-            if ($response->successful()) {
-                Log::info("Error halaman terkirim");
-            } else {
-                Log::error("Error Halaman: " . $response->body());
-            }
+        $watched = $status >= 500 || ($status === 404 && config('services.telegram.report_404'));
+
+        // Maksimal 1 notifikasi per URL per jam supaya tidak spam.
+        if ($watched && Cache::add('page-error:' . $status . ':' . sha1($request->path()), true, now()->addHour())) {
+            $this->telegram->sendLater(implode("\n", [
+                'Error terdeteksi',
+                'url = ' . $request->fullUrl(),
+                'status = ' . $status,
+                'waktu = ' . now()->format('d-m-Y H:i:s'),
+            ]));
         }
-        return $next($request);
+
+        return $response;
     }
 }

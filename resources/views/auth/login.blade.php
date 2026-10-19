@@ -1,52 +1,38 @@
 <x-guest-layout>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-slot:title>Masuk</x-slot:title>
+    <x-slot:heading>Selamat datang kembali</x-slot:heading>
+    <x-slot:subheading>Masuk untuk mengelola website atau mengirim masukan.</x-slot:subheading>
 
-    <form method="POST" action="{{ route('login') }}">
+    <x-auth-session-status class="mb-6" :status="session('status')" />
+
+    <form method="POST" action="{{ route('login') }}" class="space-y-5">
         @csrf
-        <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-label for="email" value="Email" />
+            <x-text-input id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" />
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div>
+            <div class="flex items-center justify-between">
+                <x-input-label for="password" value="Kata sandi" class="!mb-0" />
+                @if (Route::has('password.request'))
+                    <a class="text-xs font-semibold text-brand-700 hover:text-brand-900" href="{{ route('password.request') }}">Lupa kata sandi?</a>
+                @endif
+            </div>
+            <x-text-input id="password" type="password" name="password" required autocomplete="current-password" class="mt-1.5" />
+            <x-input-error :messages="$errors->get('password')" />
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-        <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('if you dont have an account please') }} <a class="underline" href="{{ route("register") }}">Register</a> </span>
-        <div  class="g-recaptcha mt-8 mb-2" data-sitekey="{{ config('captcha.sitekey') }}" ></div>
-        @error('g-recaptcha-response')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
+        <label for="remember_me" class="inline-flex items-center gap-2 text-sm text-slate-600">
+            <input id="remember_me" type="checkbox" name="remember" class="rounded border-slate-300 text-brand-700 focus:ring-brand-500">
+            Ingat saya
+        </label>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+        @include('partials.recaptcha')
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
+        <x-primary-button class="w-full !py-3">Masuk</x-primary-button>
+
+        <p class="text-center text-sm text-slate-500">Belum punya akun? <a href="{{ route('register') }}" class="font-semibold text-brand-700 hover:text-brand-900">Daftar di sini</a></p>
     </form>
 </x-guest-layout>

@@ -76,6 +76,13 @@ return [
     |
     */
 
+    /*
+    | Folder cadangan foto upload (opsional). Dulu dibaca langsung dengan
+    | env('BACKUP_PHOTOS') di controller, yang akan bernilai null setelah
+    | "php artisan config:cache".
+    */
+    'backup_path' => env('BACKUP_PHOTOS') ?: null,
+
     'links' => [
         public_path('storage') => storage_path('app/public'),
     ],

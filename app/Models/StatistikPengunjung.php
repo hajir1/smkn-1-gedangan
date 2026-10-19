@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class StatistikPengunjung extends Model
 {
-    protected $fillable = ["ip_address","user_agent","visited_at"];
+    protected $fillable = ['ip_address', 'user_agent', 'visited_at'];
+
+    protected function casts(): array
+    {
+        return ['visited_at' => 'datetime'];
+    }
 }

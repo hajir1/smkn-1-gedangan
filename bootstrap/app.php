@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Middleware\CaptchaMiddleware;
-use App\Http\Middleware\CheckRoleMiddleware;
+use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\MonitorPageErrors;
-use App\Http\Middleware\NoCacheMidlleware;
-use App\Http\Middleware\StatistikPengunjungMiddleware;
-use App\Http\Middleware\ViewarticleMiddleware;
+use App\Http\Middleware\NoStoreCache;
+use App\Http\Middleware\SecurityHeaders;
+use App\Http\Middleware\TrackVisitor;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -17,11 +16,17 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->web(append: [
+            SecurityHeaders::class,
+        ]);
+
         $middleware->alias([
-        "checkRole"=> CheckRoleMiddleware::class,
-        "viewArticle"=>ViewarticleMiddleware::class,
-        "pengunjung"=>StatistikPengunjungMiddleware::class,"cache"=>NoCacheMidlleware::class,
-        "captcha"=>CaptchaMiddleware::class,"monitorPage"=>MonitorPageErrors::class]);
+            'admin' => EnsureUserIsAdmin::class,
+            'no-store' => NoStoreCache::class,
+            'track-visitor' => TrackVisitor::class,
+            'monitor-errors' => MonitorPageErrors::class,
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

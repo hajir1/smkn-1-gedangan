@@ -12,8 +12,8 @@
             <x-titlepage quote="profil smkn 1 gedangan" title="Data Profil"></x-titlepage>
         </div>
         <div class="w-3/4 p-5">
-                @if ($profil->photo && file_exists(public_path('storage/' . $profil->photo)))
-                    <img src="{{ asset('storage/' . $profil->photo) }}"
+                @if ($profil->photo)
+                    <img src="{{ Storage::url($profil->photo) }}"
                         class="object-cover w-72 h-auto">
                 @else
                     <div class="w-full bg-gray-200 h-40 md:w-80 flex items-center justify-center">

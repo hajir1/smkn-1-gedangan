@@ -34,9 +34,11 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-    'telegram'=>[
-        'bot_token'=> env('TELEGRAM_TOKEN'),
-        'chat_id'=>env('TELEGRAM_CHAT_ID')
+    'telegram' => [
+        'bot_token' => env('TELEGRAM_TOKEN'),
+        'chat_id' => env('TELEGRAM_CHAT_ID'),
+        // true = kirim juga notifikasi halaman 404 (bisa ramai karena bot).
+        'report_404' => (bool) env('TELEGRAM_REPORT_404', false),
     ]
 
 ];

@@ -182,7 +182,9 @@ class ArtikelController extends Controller
         $article->text_content = $purifier->purify($data["text_content"]);
         $article->save();
         $article->kategoris()->sync($data["kategori_id"]);
+
         Cache::delete("articles_by_prestasis_take_5");
+        Cache::delete("article_". $article->slug);
         Cache::delete("articles_by_not_prestatis_take_5");
         Cache::delete("articles_get_6");
         return redirect()->route('artikel.index')->with('success', 'Artikel berhasil diperbarui!');

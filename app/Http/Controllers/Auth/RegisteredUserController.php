@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Rules\Recaptcha;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Rules\Password::min(8)->letters()->numbers()],
+            'g-recaptcha-response' => [new Recaptcha()],
         ]);
 
         $user = User::create([
@@ -44,6 +46,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
 
-        return redirect(route('welcome', absolute: false))->with("success","sukses membuat akun baru");
+        return redirect()->route('login')
+            ->with('status', 'Akun berhasil dibuat. Silakan cek email Anda untuk verifikasi, lalu login.');
     }
 }

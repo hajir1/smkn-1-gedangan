@@ -1,25 +1,20 @@
-<x-app-layout>
+@php($inAdmin = auth()->user()->isAdmin())
+@extends($inAdmin ? 'admin.layouts.app' : 'frontend.layouts.app')
 
+@section('title', 'Pengaturan Akun')
+@section('eyebrow', 'Akun')
+@section('hide_contact', true)
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+@section('content')
+    @unless ($inAdmin)
+        @include('frontend.partials.page-hero', ['title' => 'Pengaturan Akun', 'eyebrow' => 'Akun', 'crumbs' => [['Pengaturan Akun']]])
+    @endunless
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
-        </div>
+    <div class="{{ $inAdmin ? '' : 'mx-auto max-w-4xl px-4 py-16 sm:px-6' }} space-y-6">
+        <div class="card p-6 sm:p-8">@include('profile.partials.update-profile-information-form')</div>
+        <div class="card p-6 sm:p-8">@include('profile.partials.update-password-form')</div>
+        @if ($user->isDeletable() && ! $inAdmin)
+            <div class="card p-6 sm:p-8">@include('profile.partials.delete-user-form')</div>
+        @endif
     </div>
-</x-app-layout>
+@endsection

@@ -75,28 +75,38 @@ class FrontendController extends Controller
     // }
 
    public function welcome()  {
+
+        /* ambil data kepsek dari cache*/
         $kepsek = Cache::remember("kepsek", 60 * 60 * 24 * 7 , function(){
             return Kepsek::latest()->first();
         });
+        
+        /* ambil data 10 waka dari cache*/
         $wakas = Cache::remember("wakas_take_10", 60 * 60 * 24 * 7 , function(){
             return Waka::take(10)->get();
         });
+        
+        /* ambil data 2 galeri dari cache*/
         $galeris = Cache::remember("galeris_take_2", 60 * 60 * 24 * 7 , function(){
             return Galeri::latest()->take(2)->get();
         });
+
         // $youtubeVideos = $this->getLatestYouTubeVideos();
+        /* ambil data 5 artikel tipe prestasi dari cache*/
         $prestasis = Cache::remember("articles_by_prestatis_take_5", 60 * 60 * 24 * 7 , function(){
             return Article::with(["kategoris"])->whereHas("kategoris",function($query){
-            $query->where("nama","prestasi");
-        })->take(5)->latest()->get();
+                $query->where("nama","prestasi");
+            })->take(5)->latest()->get();
         });
         
+        /* ambil data 5 artikel tipe bukan prestasi dari cache*/
         $articles = Cache::remember("articles_by_not_prestatis_take_5", 60 * 60 * 24 * 7 , function(){
             return Article::with(["kategoris"])->whereDoesntHave("kategoris",function($query){
-            $query->where("nama","prestasi");
-        })->take(5)->latest()->get();
+                $query->where("nama","prestasi");
+            })->take(5)->latest()->get();
         });
 
+        /* ambil data profil dari cache*/
         $profil = Cache::remember("profil",60 * 60* 24 * 7,function(){
             return Profil::first();
         });
@@ -324,7 +334,7 @@ class FrontendController extends Controller
          $kepsek = Cache::remember("kepsek",60 * 60 * 24 * 7 , function(){
             return Kepsek::first();
         });
-        return view("frontend.informasi.guru",compact("gurus","kepsek"));
+        return view("frontend.Informasi.guru",compact("gurus","kepsek"));
     }
     public function artikel()  {
         $artikels = Cache::remember("articles_get_6", 60 * 60 * 24 * 7 , function(){
@@ -333,13 +343,13 @@ class FrontendController extends Controller
         $kategoris = Cache::remember("kategoris", 60 * 60 * 24 * 7 * 38 *6, function(){
             return Kategori::get();
         });
-        return view("frontend.informasi.artikel",compact("artikels","kategoris"));
+        return view("frontend.Informasi.artikel",compact("artikels","kategoris"));
     }
     public function sarana()  {
         $sarana = Cache::remember("sarana",60 * 60 * 24 * 7 , function(){
             return Sarana::first();
         });
-        return view("frontend.informasi.sarana",compact("sarana"));
+        return view("frontend.Informasi.sarana",compact("sarana"));
     }
     public function galeri()  {
         $datas = Cache::remember('galeris', 60 * 60 * 24 * 7, function () {
@@ -356,7 +366,7 @@ class FrontendController extends Controller
             $currentPage,
             ['path' => request()->url(), 'query' => request()->query()]
         );
-        return view("frontend.informasi.galeri",compact("galeris"));
+        return view("frontend.Informasi.galeri",compact("galeris"));
     }
     public function drive()  {
         $datas = Cache::remember('drives', 60, function () {
@@ -455,6 +465,6 @@ class FrontendController extends Controller
         if(!$article){
             abort(404,"artikel yang anda cari tidak ada di database");
         }
-        return view("frontend.informasi.readArtikel",compact("article","kategoris","articleTerbarus"));
+        return view("frontend.Informasi.readArtikel",compact("article","kategoris","articleTerbarus"));
    }
 }

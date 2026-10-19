@@ -1,0 +1,35 @@
+# Tambahkan / sesuaikan di file .env produksi
+
+APP_LOCALE=id
+APP_DEBUG=false
+
+# Wajib minimal 10 karakter (dipakai seeder akun admin)
+PASS_SEED=
+
+# Google reCAPTCHA v2 (di produksi wajib diisi, kalau kosong login/daftar akan ditolak)
+NOCAPTCHA_SITEKEY=
+NOCAPTCHA_SECRET=
+
+# Notifikasi Telegram (opsional)
+TELEGRAM_TOKEN=
+TELEGRAM_CHAT_ID=
+TELEGRAM_REPORT_404=false
+
+# Folder backup foto lama sebelum diganti (opsional, path absolut)
+BACKUP_PHOTOS=
+
+# Data kontak sekolah (tampil di footer & kontak)
+SCHOOL_ADDRESS="Gedangan, Kabupaten Malang, Jawa Timur"
+SCHOOL_PHONE=
+SCHOOL_EMAIL=
+
+# Tautan eksternal
+LINK_ELEARNING=https://elearning.smkn1gedangan-malang.sch.id/login/index.php
+LINK_SURVEY=https://surveyminat.smkn1gedangan-malang.sch.id/
+LINK_PPDB_JADWAL=
+LINK_PPDB_INFO=
+
+# Sesi
+SESSION_ENCRYPT=true
+# Isi true bila website sudah memakai https
+SESSION_SECURE_COOKIE=true

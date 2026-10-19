@@ -50,7 +50,7 @@ class ProfileController extends Controller
 
 
         if (!$user->isDeletable()) {
-            return redirect()->back()->with('error', 'User ini adalah utma ,tidak dapat dihapus.');
+            return redirect()->back()->with('error', 'Akun utama tidak dapat dihapus.');
         }
         Auth::logout();
         $user->delete();

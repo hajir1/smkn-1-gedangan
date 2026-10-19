@@ -201,16 +201,16 @@
 
             <div class="flex flex-col w-full gap-2 md:gap-10 ">
                 @foreach ($articles as $article)
-                <div class="flex flex-col relative items-center  bg-white border border-gray-200 rounded-lg shadow md:flex-row  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-[100%] ">
+                <div class="flex flex-col relative items-center  bg-white border border-gray-200 rounded-lg shadow md:flex-row  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-full ">
                     @if (file_exists(public_path('storage/' . $article->image)) && $article->image)
-                            <img src="{{ asset('storage/' . $article->image) }}" class="object-cover w-full sm:w-3/5 sm:h-52 rounded-t-lg h-auto md:h-52 md:w-52 md:rounded-none md:rounded-s-lg" alt="{{ $article->title }}">
-
-                        @else
-                            <div class="w-full grid place-content-center bg-gray-200 sm:w-3/5 h-52 md:w-52">
-                                <span>No Image</span> <!-- Pesan fallback -->
-                            </div>
-                        @endif
-
+                    <img src="{{ asset('storage/' . $article->image) }}" class="object-cover w-full sm:w-3/5 sm:h-52 rounded-t-lg h-auto md:h-52 md:w-52 md:rounded-none md:rounded-s-lg" alt="{{ $article->title }}">
+                    
+                    @else
+                    <div class="w-full grid place-content-center bg-gray-200 sm:w-3/5 h-52 md:w-52">
+                        <span>No Image</span> <!-- Pesan fallback -->
+                    </div>
+                    @endif
+                    
                     <div class="w-full  flex flex-col justify-between p-2 md:p-4 leading-normal ">
                         <a data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom"  href="{{route("readArticle",$article->slug)}}" class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white hover:text-slate-600 capitalize">{{ $article->title }}</a>
                         <p data-aos="fade-up" data-aos-duration="1000" data-aos-anchor-placement="top-bottom"  class="mb-3 w-full text-sm md:text-base font-normal text-gray-700 dark:text-gray-400">
