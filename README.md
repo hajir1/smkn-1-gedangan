@@ -108,14 +108,6 @@
 - **cp .env.example .env** 
 - **nano .env**
 
--   must be the same
--   ![.env](./github/env1.png)
-
--   match it with your mysql configuration
--   ![.env](./github/env2.png)
-
--   must be the same
--   ![.env](./github/env3.png)
 
 ## if config .env have been completed type the command below correctly in /var/www/html/smknega/
 
